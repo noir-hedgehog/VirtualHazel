@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>灰泽满 Hazel — 粉丝互动研究站</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --c-brand: #7C6FAF;
+      --c-brand-dark: #4F4789;
+      --c-mint: #6EC6A0;
+      --c-rose: #E87A90;
+      --c-amber: #F0A868;
+      --c-bg: #0F1117;
+      --c-card: #1A1D27;
+      --c-border: #2A2D3A;
+      --c-text: #D8D9E3;
+      --c-muted: #6B6E82;
+    }
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background: var(--c-bg);
+      color: var(--c-text);
+      min-height: 100vh;
+    }
+    .font-serif { font-family: 'Noto Serif SC', serif; }
+    .card {
+      background: var(--c-card);
+      border: 1px solid var(--c-border);
+      border-radius: 16px;
+    }
+    .stat-num {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .tag-purple { background: rgba(124,111,175,0.2); color: #B8A9E8; }
+    .tag-mint   { background: rgba(110,198,160,0.2); color: #6EC6A0; }
+    .tag-rose   { background: rgba(232,122,144,0.2); color: #E87A90; }
+    .tag-amber  { background: rgba(240,168,104,0.2); color: #F0A868; }
+    .tag-blue   { background: rgba(107,157,237,0.2); color: #6B9DED; }
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--c-brand);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .phrase-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(124,111,175,0.12);
+      border: 1px solid rgba(124,111,175,0.25);
+      border-radius: 8px;
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      color: #C4B8E8;
+      margin: 3px;
+    }
+    .phrase-chip .cnt {
+      font-size: 0.7rem;
+      color: var(--c-muted);
+      font-family: monospace;
+    }
+    .bar-bg {
+      background: rgba(255,255,255,0.06);
+      border-radius: 6px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      transition: width 1s ease;
+    }
+    nav a:hover { color: var(--c-brand); }
+    .fade-in { animation: fadeIn 0.6s ease both; }
+    @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: none; } }
+    .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+    .hero-gradient {
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124,111,175,0.35) 0%, transparent 70%);
+    }
+    .kuchaku-row { display: flex; align-items: center; gap: 0.75rem; padding: 3px 0; }
+    .kuchaku-label { min-width: 60px; font-size: 0.78rem; color: var(--c-muted); }
+    .kuchaku-bar-wrap { flex: 1; }
+    .kuchaku-bar { height: 6px; border-radius: 4px; background: var(--c-brand); opacity: 0.7; min-width: 4px; }
+    .kuchaku-cnt { min-width: 30px; text-align: right; font-size: 0.72rem; color: var(--c-muted); font-family: monospace; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────── -->
+<nav class="sticky top-0 z-50 border-b border-[#2A2D3A]" style="background:rgba(15,17,23,0.85);backdrop-filter:blur(12px)">
+  <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-2 h-2 rounded-full" style="background:var(--c-mint)" id="live-dot" title="加载中…"></div>
+      <span class="font-serif font-bold text-lg" style="color:var(--c-brand)">灰泽满</span>
+      <span class="text-xs text-[#6B6E82]">Hazel Research</span>
+    </div>
+    <div class="flex gap-5 text-sm text-[#6B6E82]">
+      <a href="#corpus">语料库</a>
+      <a href="#persona">人设分析</a>
+      <a href="#互动">粉丝互动</a>
+      <a href="#高频">高频金句</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────── -->
+<header class="hero-gradient pt-14 pb-16 text-center fade-in">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="tag tag-purple mb-4">VirtuaReal PROJECT</div>
+    <h1 class="font-serif text-5xl font-bold mb-3" style="color:#E8E4F8">
+      灰泽满 <span class="text-3xl" style="color:var(--c-muted)">Hazel</span>
+    </h1>
+    <p class="text-[#6B6E82] text-base mb-8 leading-relaxed">
+      基于B站直播弹幕数据的粉丝互动行为研究<br/>
+      <span class="text-sm">数据采样 · 内容分析 · 互动模式挖掘</span>
+    </p>
+    <div class="grid cards grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto" id="hero-stats">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</header>
+
+<!-- ── LIVE STATUS ─────────────────────────────────── -->
+<div class="max-w-6xl mx-auto px-6 pb-10">
+  <div class="card p-4 flex items-center justify-between flex-wrap gap-4">
+    <div>
+      <div class="section-title mb-1">直播间状态</div>
+      <div id="live-title" class="text-sm text-[#6B6E82]">加载中…</div>
+    </div>
+    <div class="flex items-center gap-6 text-sm">
+      <div class="text-center">
+        <div id="live-online" class="stat-num" style="color:var(--c-mint)">—</div>
+        <div class="text-[#6B6E82] text-xs mt-1">在线人数</div>
+      </div>
+      <div class="text-center">
+        <div id="live-followers" class="stat-num" style="color:var(--c-brand)">—</div>
+        <div class="text-[#6B6E82] text-xs mt-1">粉丝数</div>
+      </div>
+      <div class="text-center">
+        <div id="live-videos" class="stat-num" style="color:var(--c-amber)">—</div>
+        <div class="text-[#6B6E82] text-xs mt-1">视频数</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CORPUS OVERVIEW ──────────────────────────────── -->
+<section id="corpus" class="max-w-6xl mx-auto px-6 pb-16">
+  <div class="section-title mb-6">📊 语料库统计</div>
+  <div class="grid-cards mb-6" id="corpus-stats">
+    <!-- filled by JS -->
+  </div>
+
+  <!-- Charts row -->
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="card p-5">
+      <div class="text-sm font-medium mb-3" style="color:var(--c-text)">弹幕类型分布</div>
+      <canvas id="chart-type" height="200"></canvas>
+    </div>
+    <div class="card p-5">
+      <div class="text-sm font-medium mb-3" style="color:var(--c-text)">情感分布</div>
+      <canvas id="chart-sentiment" height="200"></canvas>
+    </div>
+    <div class="card p-5">
+      <div class="text-sm font-medium mb-3" style="color:var(--c-text)">内容分类分布</div>
+      <canvas id="chart-category" height="200"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ── PERSONA ──────────────────────────────────────── -->
+<section id="persona" class="max-w-6xl mx-auto px-6 pb-16">
+  <div class="section-title mb-6">🎭 人设分析</div>
+
+  <div class="grid md:grid-cols-2 gap-6 mb-8">
+    <!-- 基本信息 -->
+    <div class="card p-6">
+      <div class="font-serif font-bold text-xl mb-4" style="color:#E8E4F8" id="persona-name">加载中…</div>
+      <div class="space-y-3 text-sm" id="persona-info">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <!-- 口癖热力图 -->
+    <div class="card p-6">
+      <div class="font-medium mb-4" style="color:#E8E4F8">🔥 口癖热力图</div>
+      <div id="kuchaku-container">
+        <!-- filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Sentiment bars -->
+  <div class="card p-6 mb-6">
+    <div class="font-medium mb-4" style="color:#E8E4F8">💬 情感构成</div>
+    <div id="sentiment-bars" class="space-y-3">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ── INTERACTION PATTERNS ──────────────────────────── -->
+<section id="互动" class="max-w-6xl mx-auto px-6 pb-16">
+  <div class="section-title mb-6">💡 粉丝互动模式</div>
+  <div class="grid md:grid-cols-2 gap-6">
+    <!-- Hazel mentions -->
+    <div class="card p-6">
+      <div class="font-medium mb-4" style="color:#E8E4F8">🏷️ 提及灰泽满 TOP</div>
+      <div class="space-y-2" id="hazel-mentions">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <!-- Category breakdown -->
+    <div class="card p-6">
+      <div class="font-medium mb-4" style="color:#E8E4F8">📂 内容分类</div>
+      <div id="category-bars" class="space-y-3">
+        <!-- filled by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TOP PHRASES ──────────────────────────────────── -->
+<section id="高频" class="max-w-6xl mx-auto px-6 pb-20">
+  <div class="section-title mb-6">🌟 高频金句</div>
+  <div class="card p-6">
+    <div class="text-xs text-[#6B6E82] mb-4">以下为B站弹幕中出现频次最高的重复弹幕，反映直播间独特的互动文化</div>
+    <div id="top-phrases" class="flex flex-wrap gap-2">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <!-- Per-category top -->
+  <div class="grid md:grid-cols-3 gap-6 mt-6">
+    <div class="card p-5" id="cat-general">
+      <div class="tag tag-purple mb-3">通用</div>
+    </div>
+    <div class="card p-5" id="cat-greeting">
+      <div class="tag tag-mint mb-3">问候</div>
+    </div>
+    <div class="card p-5" id="cat-praise">
+      <div class="tag tag-amber mb-3">表扬</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ───────────────────────────────────────── -->
+<footer class="border-t border-[#2A2D3A] py-8 text-center text-xs text-[#6B6E82]">
+  <p>灰泽满 Hazel — 粉丝互动研究站</p>
+  <p class="mt-1">数据来源：B站公开直播弹幕 · 仅供研究使用</p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
