@@ -38,6 +38,15 @@ jobs:
           echo "=== dist/assets ===" && ls -la dist/assets/ 2>/dev/null || echo "(no assets dir)"
           echo "=== dist/index.html ===" && head -5 dist/index.html
 
+      # ── Copy data files into dist/ before deploy ────────────────────────
+      # data/*.json is gitignored; always copy latest versions
+      - name: Copy data files
+        run: |
+          mkdir -p dist/data
+          cp data/corpus.json dist/data/corpus.json
+          cp data/persona.json dist/data/persona.json
+          echo "=== dist/data/ ===" && ls -la dist/data/
+
       # ── gh-pages deployment ──────────────────────────────────────────────
       - name: Setup Pages
         uses: actions/configure-pages@v5
