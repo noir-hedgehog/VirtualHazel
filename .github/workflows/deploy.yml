@@ -22,41 +22,25 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Debug workspace
-        run: |
-          echo "=== pwd ===" && pwd
-          echo "=== ls ===" && ls -la
-          echo "=== ls src-react ===" && ls -la src-react/ 2>&1 || echo "NOT FOUND"
-          echo "=== package.json ===" && cat src-react/package.json
-
       - name: Install dependencies
-        run: |
-          cd src-react && npm ci
-        working-directory: ${{ github.workspace }}
+        run: npm ci
 
       - name: Build React app
-        run: |
-          cd src-react && npm run build
-        working-directory: ${{ github.workspace }}
+        run: npm run build
 
       - name: Validate dist output
         run: |
-          cd src-react && echo "=== dist/ contents ===" && ls -la dist/
-          cd src-react && echo "=== dist/assets ===" && ls -la dist/assets/ 2>/dev/null || echo "(no assets dir)"
-          cd src-react && echo "=== dist/index.html ===" && head -5 dist/index.html
-        working-directory: ${{ github.workspace }}
+          echo "=== dist/ contents ===" && ls -la dist/ || echo "(no dist/)"
+          echo "=== dist/assets ===" && ls -la dist/assets/ 2>/dev/null || echo "(no assets/)"
+          echo "=== dist/index.html ===" && head -5 dist/index.html 2>/dev/null || echo "(no index.html)"
 
-      # Copy data files into src-react/dist/data/ before deploy
-      # data/*.json is gitignored; always copy latest versions
       - name: Copy data files
         run: |
           mkdir -p src-react/dist/data
           cp data/corpus.json src-react/dist/data/corpus.json
           cp data/persona.json src-react/dist/data/persona.json
-          echo "=== src-react/dist/data/ ===" && ls -la src-react/dist/data/
-        working-directory: ${{ github.workspace }}
+          echo "=== src-react/dist/data/ ===" && ls -la src-react/dist/data/ || echo "FAILED"
 
-      # gh-pages deployment
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
