@@ -1,5 +1,7 @@
-dist/
-data/*.json
+/dist/
+/data/*.json
 __pycache__/
 *.pyc
 .DS_Store
+src-react/node_modules/
+!src-react/dist/

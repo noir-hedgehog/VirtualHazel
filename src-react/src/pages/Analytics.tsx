@@ -1,0 +1,10 @@
+export default function Analytics() {
+  return (
+    <div className="max-w-6xl mx-auto px-6 py-16">
+      <div className="section-title mb-6">📈 数据分析</div>
+      <div className="card p-8 text-center">
+        <p className="text-[#6B6E82]">高级分析看板 — 敬请期待</p>
+      </div>
+    </div>
+  );
+}
