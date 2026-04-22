@@ -38,14 +38,15 @@ jobs:
           echo "=== dist/assets ===" && ls -la dist/assets/ 2>/dev/null || echo "(no assets dir)"
           echo "=== dist/index.html ===" && head -5 dist/index.html
 
-      # ── Copy data files into dist/ before deploy ────────────────────────
+      # ── Copy data files into src-react/dist/data/ before deploy ────────────
       # data/*.json is gitignored; always copy latest versions
+      # Must use src-react/dist/ because upload-pages-artifact targets that path
       - name: Copy data files
         run: |
-          mkdir -p dist/data
-          cp data/corpus.json dist/data/corpus.json
-          cp data/persona.json dist/data/persona.json
-          echo "=== dist/data/ ===" && ls -la dist/data/
+          mkdir -p src-react/dist/data
+          cp data/corpus.json src-react/dist/data/corpus.json
+          cp data/persona.json src-react/dist/data/persona.json
+          echo "=== src-react/dist/data/ ===" && ls -la src-react/dist/data/
 
       # ── gh-pages deployment ──────────────────────────────────────────────
       - name: Setup Pages
