@@ -1,0 +1,28 @@
+name: Diagnostic
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: List files
+        run: |
+          echo "=== pwd ==="
+          pwd
+          echo "=== workspace ==="
+          echo ${{ github.workspace }}
+          echo "=== top-level ls ==="
+          ls -la
+          echo "=== src-react exists? ==="
+          ls -la src-react/ 2>&1 || echo "NOT FOUND"
+          echo "=== . ==="
+          ls -la ./
+          echo "=== find for package.json ==="
+          find . -maxdepth 3 -name "package.json" 2>/dev/null
