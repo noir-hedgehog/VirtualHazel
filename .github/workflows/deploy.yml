@@ -22,21 +22,20 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Diagnose
-        run: |
-          set -x
-          pwd
-          ls -la
-          ls -la src-react/
-          cat src-react/package.json
-          npm ci
-          npm run build
+      - name: Install dependencies
+        run: npm install
+        working-directory: src-react
+
+      - name: Build React app
+        run: npm run build
+        working-directory: src-react
 
       - name: Copy data files
         run: |
-          mkdir -p src-react/dist/data
-          cp data/corpus.json src-react/dist/data/corpus.json
-          cp data/persona.json src-react/dist/data/persona.json
+          mkdir -p dist/data
+          cp data/corpus.json dist/data/corpus.json
+          cp data/persona.json dist/data/persona.json
+        working-directory: src-react
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
