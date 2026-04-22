@@ -1,0 +1,22 @@
+name: Debug Runner FS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Show workspace
+        run: |
+          echo "=== github.workspace ==="
+          echo ${{ github.workspace }}
+          echo "=== pwd ==="
+          pwd
+          echo "=== root listing ==="
+          ls -la
+          echo "=== root listing (full) ==="
+          ls -la | cat
