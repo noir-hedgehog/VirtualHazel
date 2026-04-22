@@ -22,16 +22,12 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Debug: show workspace
+      - name: Debug workspace
         run: |
-          echo "=== pwd ==="
-          pwd
-          echo "=== ls -la ==="
-          ls -la
-          echo "=== ls src-react ==="
-          ls -la src-react/ 2>&1 || echo "src-react NOT FOUND"
-          echo "=== cat package.json name ==="
-          cat src-react/package.json | python3 -c "import sys,json; print(json.load(sys.stdin)['name'])" 2>&1
+          echo "=== pwd ===" && pwd
+          echo "=== ls ===" && ls -la
+          echo "=== ls src-react ===" && ls -la src-react/ 2>&1 || echo "NOT FOUND"
+          echo "=== package.json ===" && cat src-react/package.json
 
       - name: Install dependencies
         run: |
@@ -50,7 +46,7 @@ jobs:
           cd src-react && echo "=== dist/index.html ===" && head -5 dist/index.html
         working-directory: ${{ github.workspace }}
 
-      # ── Copy data files into src-react/dist/data/ before deploy ────────────
+      # Copy data files into src-react/dist/data/ before deploy
       # data/*.json is gitignored; always copy latest versions
       - name: Copy data files
         run: |
@@ -60,7 +56,7 @@ jobs:
           echo "=== src-react/dist/data/ ===" && ls -la src-react/dist/data/
         working-directory: ${{ github.workspace }}
 
-      # ── gh-pages deployment ──────────────────────────────────────────────
+      # gh-pages deployment
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
