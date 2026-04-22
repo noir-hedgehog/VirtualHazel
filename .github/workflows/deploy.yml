@@ -8,14 +8,35 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     permissions:
       contents: read
       pages: write
       id-token: write
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: src-react
+        run: npm ci
+
+      - name: Build
+        working-directory: src-react
+        run: npm run build
+
+      - name: Copy data files
+        run: cp data/corpus.json src-react/dist/data/ && cp data/persona.json src-react/dist/data/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
