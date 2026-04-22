@@ -17,26 +17,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Setup Node.js 22
-        uses: actions/setup-node@v5
-        with:
-          node-version: '22'
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: src-react
-
-      - name: Build React app
-        run: npm run build
-        working-directory: src-react
-
-      - name: Copy data files
-        run: |
-          mkdir -p dist/data
-          cp data/corpus.json dist/data/corpus.json
-          cp data/persona.json dist/data/persona.json
-        working-directory: src-react
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
