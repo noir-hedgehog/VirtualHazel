@@ -22,24 +22,21 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build React app
-        run: npm run build
-
-      - name: Validate dist output
+      - name: Diagnose
         run: |
-          echo "=== dist/ contents ===" && ls -la dist/ || echo "(no dist/)"
-          echo "=== dist/assets ===" && ls -la dist/assets/ 2>/dev/null || echo "(no assets/)"
-          echo "=== dist/index.html ===" && head -5 dist/index.html 2>/dev/null || echo "(no index.html)"
+          set -x
+          pwd
+          ls -la
+          ls -la src-react/
+          cat src-react/package.json
+          npm ci
+          npm run build
 
       - name: Copy data files
         run: |
           mkdir -p src-react/dist/data
           cp data/corpus.json src-react/dist/data/corpus.json
           cp data/persona.json src-react/dist/data/persona.json
-          echo "=== src-react/dist/data/ ===" && ls -la src-react/dist/data/ || echo "FAILED"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
