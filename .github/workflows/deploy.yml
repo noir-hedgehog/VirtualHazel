@@ -23,19 +23,21 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: npm ci
-        working-directory: ${{ github.workspace }}/src-react
+        run: |
+          cd src-react && npm ci
+        working-directory: ${{ github.workspace }}
 
       - name: Build React app
-        run: npm run build
-        working-directory: ${{ github.workspace }}/src-react
+        run: |
+          cd src-react && npm run build
+        working-directory: ${{ github.workspace }}
 
       - name: Validate dist output
         run: |
-          echo "=== dist/ contents ===" && ls -la dist/
-          echo "=== dist/assets ===" && ls -la dist/assets/ 2>/dev/null || echo "(no assets dir)"
-          echo "=== dist/index.html ===" && head -5 dist/index.html
-        working-directory: ${{ github.workspace }}/src-react
+          cd src-react && echo "=== dist/ contents ===" && ls -la dist/
+          cd src-react && echo "=== dist/assets ===" && ls -la dist/assets/ 2>/dev/null || echo "(no assets dir)"
+          cd src-react && echo "=== dist/index.html ===" && head -5 dist/index.html
+        working-directory: ${{ github.workspace }}
 
       # ── Copy data files into src-react/dist/data/ before deploy ────────────
       # data/*.json is gitignored; always copy latest versions
@@ -45,6 +47,7 @@ jobs:
           cp data/corpus.json src-react/dist/data/corpus.json
           cp data/persona.json src-react/dist/data/persona.json
           echo "=== src-react/dist/data/ ===" && ls -la src-react/dist/data/
+        working-directory: ${{ github.workspace }}
 
       # ── gh-pages deployment ──────────────────────────────────────────────
       - name: Setup Pages
