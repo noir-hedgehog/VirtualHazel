@@ -22,6 +22,17 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Debug: show workspace
+        run: |
+          echo "=== pwd ==="
+          pwd
+          echo "=== ls -la ==="
+          ls -la
+          echo "=== ls src-react ==="
+          ls -la src-react/ 2>&1 || echo "src-react NOT FOUND"
+          echo "=== cat package.json name ==="
+          cat src-react/package.json | python3 -c "import sys,json; print(json.load(sys.stdin)['name'])" 2>&1
+
       - name: Install dependencies
         run: |
           cd src-react && npm ci
