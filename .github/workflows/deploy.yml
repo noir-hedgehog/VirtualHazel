@@ -41,7 +41,7 @@ jobs:
         run: npm run build
 
       - name: Copy data files
-        run: cp data/corpus.json src-react/dist/data/ && cp data/persona.json src-react/dist/data/
+        run: cp data/*.json src-react/dist/data/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

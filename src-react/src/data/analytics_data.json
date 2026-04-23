@@ -1,0 +1,316 @@
+{
+  "total_danmaku": 22068,
+  "unique_senders": 1330,
+  "live_videos": 5,
+  "top20_sender_pct": 54.6,
+  "top_phrases": [
+    {
+      "text": "丽塔、神罚、红莲？",
+      "count": 1
+    },
+    {
+      "text": "对抗家庭",
+      "count": 1
+    },
+    {
+      "text": "嘴硬这一块",
+      "count": 1
+    },
+    {
+      "text": "互相对抗是吧",
+      "count": 1
+    },
+    {
+      "text": "满妈：我也要暗示吗....­..",
+      "count": 1
+    },
+    {
+      "text": "速切这段让满妈刷到",
+      "count": 1
+    },
+    {
+      "text": "那你就天天气绿冻？那你就天天气绿冻？那你就天天气绿冻？",
+      "count": 1
+    },
+    {
+      "text": "诶？是这样吗，但我觉得也还好­吧…",
+      "count": 1
+    },
+    {
+      "text": "一家子对抗路",
+      "count": 1
+    },
+    {
+      "text": "生有涯，义无涯",
+      "count": 1
+    },
+    {
+      "text": "哈哈哈",
+      "count": 1
+    },
+    {
+      "text": "满妈：我也要暗示吗...... ­",
+      "count": 1
+    },
+    {
+      "text": "对抗路母女",
+      "count": 1
+    },
+    {
+      "text": "都是好女孩",
+      "count": 1
+    },
+    {
+      "text": "家族传承",
+      "count": 1
+    },
+    {
+      "text": "你家还有人类吗你家还有人类吗",
+      "count": 1
+    },
+    {
+      "text": "嘴硬也是遗传",
+      "count": 1
+    },
+    {
+      "text": "“满弟最好了。”",
+      "count": 1
+    },
+    {
+      "text": "知错改错不认错",
+      "count": 1
+    },
+    {
+      "text": "家庭和睦呀满神",
+      "count": 1
+    }
+  ],
+  "sentiment": {
+    "positive": 908,
+    "positive_pct": 4.1,
+    "negative": 189,
+    "negative_pct": 0.9,
+    "question": 3758,
+    "question_pct": 17.0,
+    "neutral": 17213,
+    "neutral_pct": 78.0
+  },
+  "category": {
+    "interaction": 19401,
+    "interaction_pct": 87.9,
+    "greeting": 1020,
+    "greeting_pct": 4.6,
+    "praise": 1108,
+    "praise_pct": 5.0,
+    "spam": 539,
+    "spam_pct": 2.4
+  },
+  "video_stats": {
+    "BV1BSQABTEzR": {
+      "count": 3031,
+      "duration": 7845,
+      "min_time": 1493.652,
+      "max_time": 7803.521,
+      "avg_per_min": 23.304864560497755
+    },
+    "BV1M7D1BKEBo": {
+      "count": 2826,
+      "duration": 7235,
+      "min_time": 4715.518,
+      "max_time": 7199.686,
+      "avg_per_min": 23.551027086459047
+    },
+    "BV1ocDsBxEQb": {
+      "count": 3848,
+      "duration": 4284,
+      "min_time": 1220.319,
+      "max_time": 4284.024,
+      "avg_per_min": 53.893255499969186
+    },
+    "BV1rYQhBQEQe": {
+      "count": 3063,
+      "duration": 7899,
+      "min_time": 4685.707,
+      "max_time": 7853.518,
+      "avg_per_min": 23.40097775290004
+    },
+    "BV1wjQpBaEXt": {
+      "count": 2616,
+      "duration": 9879,
+      "min_time": 7775.489,
+      "max_time": 9854.461,
+      "avg_per_min": 15.927811779862948
+    }
+  },
+  "time_segments": {
+    "BV1BSQABTEzR": {
+      "beg_20pct": 0.0,
+      "mid_20_60pct": 0.0,
+      "end60_80pct": 0.0,
+      "end80_100pct": 100.0
+    },
+    "BV1M7D1BKEBo": {
+      "beg_20pct": 0.0,
+      "mid_20_60pct": 0.0,
+      "end60_80pct": 49.5,
+      "end80_100pct": 50.5
+    },
+    "BV1ocDsBxEQb": {
+      "beg_20pct": 0.0,
+      "mid_20_60pct": 39.4,
+      "end60_80pct": 29.5,
+      "end80_100pct": 31.1
+    },
+    "BV1rYQhBQEQe": {
+      "beg_20pct": 0.0,
+      "mid_20_60pct": 0.0,
+      "end60_80pct": 42.6,
+      "end80_100pct": 57.4
+    },
+    "BV1wjQpBaEXt": {
+      "beg_20pct": 0.0,
+      "mid_20_60pct": 0.0,
+      "end60_80pct": 10.1,
+      "end80_100pct": 89.9
+    }
+  },
+  "density_data": {
+    "BV1BSQABTEzR": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      31,
+      673,
+      600,
+      529,
+      678,
+      512,
+      7
+    ],
+    "BV1M7D1BKEBo": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      167,
+      394,
+      308,
+      384,
+      284,
+      253,
+      300,
+      379,
+      357,
+      0
+    ],
+    "BV1ocDsBxEQb": [
+      0,
+      0,
+      0,
+      0,
+      348,
+      300,
+      277,
+      403,
+      288,
+      350,
+      404,
+      526,
+      353,
+      467,
+      132
+    ],
+    "BV1rYQhBQEQe": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      545,
+      429,
+      305,
+      428,
+      428,
+      476,
+      174,
+      232,
+      44
+    ],
+    "BV1wjQpBaEXt": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      53,
+      502,
+      445,
+      188,
+      293,
+      485,
+      315,
+      335
+    ]
+  }
+}
